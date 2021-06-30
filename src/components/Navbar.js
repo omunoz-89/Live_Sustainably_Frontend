@@ -3,43 +3,84 @@ import { NavLink, Link } from 'react-router-dom';
 
 const Navbar = (props) => {
     return (
-        <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
-            <div className="container">
-                <Link className="navbar-brand" to="/">MERN Auth</Link>
-                <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExample07" aria-controls="#navbarsExample07" aria-expanded="false" aria-label="Toggle navigation">
-                    <span className="navbar-toggler-icon"></span>
-                </button>
-                <div className="collapse navbar-collapse" id="navbarsExample07">
-                    <ul className="navbar-nav mr-auto">
-                        <li className="nav-item">
-                            <NavLink className="nav-link" exact to="/">Home</NavLink>
-                        </li>
-                        <li className="nav-item">
-                            <NavLink className="nav-link"  to="/about">About</NavLink>
-                        </li>
-                    </ul>
-                    {
-                        props.isAuth 
-                        ? <ul className="navbar-nav ml-auto">
-                            <li className="nav-item">
-                                <NavLink className="nav-link"  to="/profile">Profile</NavLink>
-                            </li>
-                            <li className="nav-item">
-                                <span onClick={props.handleLogout} className="nav-link logout-link">Logout</span>
-                            </li>
-                        </ul>
-                        : <ul className="navbar-nav ml-auto">
-                            <li className="nav-item">
-                                <NavLink className="nav-link"  to="/signup">Create Account</NavLink>
-                            </li>
-                            <li className="nav-item">
-                                <NavLink className="nav-link"  to="/login">Login</NavLink>
-                            </li>
-                          </ul>
-                    }
-                </div>
-            </div>
-        </nav>
+        <nav class="navbar" role="navigation" aria-label="main navigation">
+  <div class="navbar-brand">
+    <a class="navbar-item" href="https://bulma.io">
+      <img src="https://bulma.io/images/bulma-logo.png" width="112" height="28"/>
+    </a>
+
+    <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false" data-target="navbarBasicExample">
+      <span aria-hidden="true"></span>
+      <span aria-hidden="true"></span>
+      <span aria-hidden="true"></span>
+    </a>
+  </div>
+
+  <div id="navbarBasicExample" class="navbar-menu">
+    <div class="navbar-start">
+      <a class="navbar-item">
+      <NavLink className="nav-link" exact to="/">Home</NavLink>
+      </a>
+
+      <a class="navbar-item">
+      <NavLink className="nav-link"  to="/about">About</NavLink>
+      </a>
+
+      <a class="navbar-item">
+      <NavLink className="nav-link"  to="/plants">Plants</NavLink>
+      </a>
+
+      <div class="navbar-item has-dropdown is-hoverable">
+        <a class="navbar-link">
+          More
+        </a>
+
+        <div class="navbar-dropdown">
+          <a class="navbar-item">
+            About
+          </a>
+          <a class="navbar-item">
+            Jobs
+          </a>
+          <a class="navbar-item">
+            Contact
+          </a>
+          <hr class="navbar-divider"/>
+          <a class="navbar-item">
+            Report an issue
+          </a>
+        </div>
+      </div>
+    </div>
+{
+    props.isAuth
+    ?<div class="navbar-end">
+      <div class="navbar-item">
+        <div class="buttons">
+          <a class="button is-primary">
+          <NavLink className="nav-link"  to="/profile">Profile</NavLink>
+          </a>
+          <a class="button is-light">
+          <span onClick={props.handleLogout} className="nav-link logout-link">Logout</span>
+          </a>
+        </div>
+      </div>
+    </div>
+    :<div class="navbar-end">
+      <div class="navbar-item">
+        <div class="buttons">
+          <a class="button is-primary">
+          <NavLink className="nav-link"  to="/signup">Create Account</NavLink>
+          </a>
+          <a class="button is-light">
+          <NavLink className="nav-link"  to="/login">Login</NavLink>
+          </a>
+        </div>
+      </div>
+    </div>
+}
+  </div>
+</nav>
     );
 }
 

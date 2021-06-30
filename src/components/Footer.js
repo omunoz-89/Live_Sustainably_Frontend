@@ -2,11 +2,13 @@ import React from 'react';
 
 const Footer = () => {
     return (
-        <footer className="footer bg-dark">
-            <div className="container text-center">
-                <span className="text-muted">@2021 Built by Omar Munoz (during COVID)</span>
-            </div>
-        </footer>
+        <footer class="footer">
+  <div class="content has-text-centered">
+    <p>
+      <strong>Live Sustainably</strong> by Omar Munoz
+    </p>
+  </div>
+</footer>
     )
 }
 

@@ -13,6 +13,8 @@ import Profile from "./components/Profile";
 import Signup from "./components/Signup";
 import Login from "./components/Login";
 import About from "./components/About";
+import Plants from "./components/Plants";
+
 
 //Private route component
 const PrivateRoute = ({component: Component, ...rest}) => {
@@ -67,6 +69,7 @@ function App() {
           <Route path='/signup' component={Signup}></Route>
           <Route path='/login' render={(props) => <Login {...props} user={currentUser} nowCurrentUser={nowCurrentUser} setIsAuthenticated={setIsAuthenticated} /> } />
           <Route path='/about' component={About} />
+          <Route path='/plants' component={Plants} />
           <Route exact path='/' component={Welcome}/>
           <PrivateRoute path='/profile' component={Profile} user={currentUser} handleLogout={handleLogout} />
         </Switch>

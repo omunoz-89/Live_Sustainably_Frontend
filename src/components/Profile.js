@@ -7,6 +7,8 @@ const Profile = (props) => {
     const expirationTime = new Date(exp * 1000);
     let currentTime = Date.now();
     console.log(String(expirationTime));
+    console.log(props)
+    console.log(props.user)
 
     if (currentTime >= expirationTime) {
         handleLogout();

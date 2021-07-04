@@ -1,80 +1,55 @@
 import React from 'react';
 import { NavLink, Link } from 'react-router-dom';
+import axios from "axios";
+
+
+
 
 const Navbar = (props) => {
+  const CONNECTION_URI = process.env.REACT_APP_SERVER_URL;
+
     return (
-        <nav class="navbar" role="navigation" aria-label="main navigation">
-  <div class="navbar-brand">
-    <a class="navbar-item" href="https://bulma.io">
-      <img src="https://bulma.io/images/bulma-logo.png" width="112" height="28"/>
+        <nav className="navbar is-success is-light" role="navigation" aria-label="main navigation">
+  <div className="navbar-brand">
+    <a className="navbar-item" id='logo' href="/">
+      <img id="logo-img" src="https://res.cloudinary.com/sei412-om/image/upload/v1625163518/liveS_dlagci.png"/>
     </a>
 
-    <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false" data-target="navbarBasicExample">
+    <a role="button" className="navbar-burger" aria-label="menu" aria-expanded="false" data-target="navbarBasicExample">
       <span aria-hidden="true"></span>
       <span aria-hidden="true"></span>
       <span aria-hidden="true"></span>
     </a>
   </div>
 
-  <div id="navbarBasicExample" class="navbar-menu">
-    <div class="navbar-start">
-      <a class="navbar-item">
-      <NavLink className="nav-link" exact to="/">Home</NavLink>
-      </a>
+  <div className="navbar-menu">
+    <div className="navbar-start">
+      <NavLink className="navbar-item" exact to="/">Home</NavLink>
+      <NavLink className="navbar-item"  to="/about">About</NavLink>
+      <NavLink className="navbar-item"  to="/plants">Plants</NavLink>
+      {
+        props.isAuth
+        ?<NavLink className="navbar-item"  to="/garden">My Garden</NavLink>
+        : <a href="#"></a>
 
-      <a class="navbar-item">
-      <NavLink className="nav-link"  to="/about">About</NavLink>
-      </a>
+      }
 
-      <a class="navbar-item">
-      <NavLink className="nav-link"  to="/plants">Plants</NavLink>
-      </a>
-
-      <div class="navbar-item has-dropdown is-hoverable">
-        <a class="navbar-link">
-          More
-        </a>
-
-        <div class="navbar-dropdown">
-          <a class="navbar-item">
-            About
-          </a>
-          <a class="navbar-item">
-            Jobs
-          </a>
-          <a class="navbar-item">
-            Contact
-          </a>
-          <hr class="navbar-divider"/>
-          <a class="navbar-item">
-            Report an issue
-          </a>
-        </div>
-      </div>
     </div>
 {
     props.isAuth
-    ?<div class="navbar-end">
-      <div class="navbar-item">
-        <div class="buttons">
-          <a class="button is-primary">
-          <NavLink className="nav-link"  to="/profile">Profile</NavLink>
-          </a>
-          <a class="button is-light">
-          <span onClick={props.handleLogout} className="nav-link logout-link">Logout</span>
-          </a>
+    ?<div className="navbar-end">
+      <div className="navbar-item">
+        <div className="buttons">
+          <NavLink className="navbar-item button is-dark"  to="/profile">Profile</NavLink>
+          <span onClick={props.handleLogout} className="navbar-item button is-danger is-light logout-link">Logout</span>
         </div>
       </div>
     </div>
-    :<div class="navbar-end">
-      <div class="navbar-item">
-        <div class="buttons">
-          <a class="button is-primary">
-          <NavLink className="nav-link"  to="/signup">Create Account</NavLink>
-          </a>
-          <a class="button is-light">
-          <NavLink className="nav-link"  to="/login">Login</NavLink>
-          </a>
+    :<div className="navbar-end">
+      <div className="navbar-item">
+        <div className="buttons">
+          <NavLink className="navbar-item button is-light is-link"  to="/signup">Create Account</NavLink>
+          <NavLink className="navbar-item button is-light"  to="/login">Login</NavLink>
         </div>
       </div>
     </div>

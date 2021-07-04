@@ -14,6 +14,8 @@ import Signup from "./components/Signup";
 import Login from "./components/Login";
 import About from "./components/About";
 import Plants from "./components/Plants";
+import Garden from "./components/Garden";
+
 
 
 //Private route component
@@ -69,7 +71,8 @@ function App() {
           <Route path='/signup' component={Signup}></Route>
           <Route path='/login' render={(props) => <Login {...props} user={currentUser} nowCurrentUser={nowCurrentUser} setIsAuthenticated={setIsAuthenticated} /> } />
           <Route path='/about' component={About} />
-          <Route path='/plants' component={Plants} />
+          <PrivateRoute path='/plants' component={Plants} user={currentUser}/>
+          <PrivateRoute path='/garden' component={Garden} user={currentUser}/>
           <Route exact path='/' component={Welcome}/>
           <PrivateRoute path='/profile' component={Profile} user={currentUser} handleLogout={handleLogout} />
         </Switch>

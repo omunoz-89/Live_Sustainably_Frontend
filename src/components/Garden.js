@@ -23,12 +23,19 @@ const handleBack = async (e) => {
 
 const handleSave = async (e) => {
   e.preventDefault();
+  let plantImg;
   let plantName;
   let sciName;
   let desc;
   let sunReq;
   let sow;
   let space;
+  let newNote;
+  if(e.target.image.value === ''){
+    plantImg = e.target.image.placeholder
+  } else {
+    plantImg = e.target.image.value
+  }
   if(e.target.name.value === ''){
     plantName = e.target.name.placeholder
   } else {
@@ -59,21 +66,29 @@ const handleSave = async (e) => {
   } else {
     space = e.target.spacing.value
   }
+  if(e.target.note.value === ''){
+    newNote = null
+  } else {
+    newNote = e.target.note.value
+  }
     let payload = {
       id: e.target.id.value,
+      image_url: plantImg,
       name: plantName,
       scientific_name: sciName,
       description: desc,
       sun: sunReq,
       sowing_method: sow,
       spacing: space,
+      newNote: newNote,
     }
     try {
       let response = await axios.put(CONNECTION_URI + `/api/gardens/${id}`, payload)
       let { data } = response;
       console.log(data);
-      setPlants([])
-      searchGarden()
+      // setPlants([])
+      // searchGarden()
+      handleView(e)
     } catch (error) {
       alert("Error occurred, please try again...");
     }
@@ -97,9 +112,11 @@ const handleUpdate = async (e) => {
         <div className="card">
           <div className="card-image">
             <figure className="image is-4by3">
-              <img src={plant.image_url} alt="Placeholder image" />
+              <img src={plant.image_url}/>
             </figure>
           </div>
+          <label htmlFor="image">Image URL:</label>
+              <textarea id="url" type="text" name="image" placeholder={plant.image_url}/>
           <div className="card-content">
             <div className="media">
               <div className="media-content">
@@ -123,6 +140,10 @@ const handleUpdate = async (e) => {
           <br/>
           <label htmlFor="spacing">Spacing:</label>
           <input name='spacing' type="text" placeholder={plant.spacing}/>
+          <br/>
+          <label htmlFor="note">Add Notes:</label>
+          <textarea id='note' type="text" name="note"></textarea>
+
           <footer class="card-footer">
           <input type="text"  name='id' value={plant._id} hidden/>
           <button className="button is-success">Save</button>
@@ -141,6 +162,9 @@ const handleView = async (e) => {
   const getPlant = await axios.get(CONNECTION_URI + `/api/gardens/${id}`)
   console.log(getPlant)
   let plant = getPlant.data.garden[0]
+  const noteList = await plant.notes.map((n, idx) => {
+    return <li key={idx}>{n}</li>
+  })
   setPlants(
     <div>
     <form onSubmit={handleBack}>
@@ -171,6 +195,8 @@ const handleView = async (e) => {
       <li>Sowing Mehtod: {plant.sowing_method}</li>
       <li>Row Spacing: {plant.spacing}cm</li>
       </ul>
+      <h5>Notes:</h5>
+      <ul>{noteList}</ul>
     </div>
           <footer class="card-footer">
           <form onSubmit={handleUpdate}>

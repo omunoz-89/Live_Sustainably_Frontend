@@ -98,3 +98,14 @@ resize: none;
 width: 100%;
 height: 15vh;
 }
+
+#plant-show {
+  min-width: 70vw;
+  margin: 0 auto;
+}
+
+#sowing {
+  resize: none;
+  width: 100%;
+  height:5vh;
+}

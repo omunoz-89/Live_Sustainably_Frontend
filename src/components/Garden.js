@@ -8,7 +8,6 @@ const Garden = (props) => {
   const [data, setData] = useState();
   const id = props.user.id;
   const CONNECTION_URI = process.env.REACT_APP_SERVER_URL;
-  console.log(id)
 
   const handleDelete = async (e) => {
     e.preventDefault();
@@ -24,18 +23,62 @@ const handleBack = async (e) => {
 
 const handleSave = async (e) => {
   e.preventDefault();
-  let payload = {
-    id: e.target.id.value,
-    name: e.target.name.value,
+  let plantName;
+  let sciName;
+  let desc;
+  let sunReq;
+  let sow;
+  let space;
+  if(e.target.name.value === ''){
+    plantName = e.target.name.placeholder
+  } else {
+    plantName = e.target.name.value
   }
-  try {
-    let response = await axios.put(CONNECTION_URI + `/api/gardens/${id}`, payload)
-    let { data } = response;
-    console.log(data);
-  } catch (error) {
-    alert("Error occurred, please try again...");
+  if(e.target.scientific_name.value === ''){
+    sciName = e.target.scientific_name.placeholder
+  } else {
+    sciName = e.target.scientific_name.value
   }
+  if(e.target.description.value === ''){
+    desc = e.target.description.placeholder
+  } else {
+    desc = e.target.description.value
+  }
+  if(e.target.sun.value === ''){
+    sunReq = e.target.sun.placeholder
+  } else {
+    sunReq = e.target.sun.value
+  }
+  if(e.target.sowing_method.value === ''){
+    sow = e.target.sowing_method.placeholder
+  } else {
+    sow = e.target.sowing_method.value
+  }
+  if(e.target.spacing.value === ''){
+    space = e.target.spacing.placeholder
+  } else {
+    space = e.target.spacing.value
+  }
+    let payload = {
+      id: e.target.id.value,
+      name: plantName,
+      scientific_name: sciName,
+      description: desc,
+      sun: sunReq,
+      sowing_method: sow,
+      spacing: space,
+    }
+    try {
+      let response = await axios.put(CONNECTION_URI + `/api/gardens/${id}`, payload)
+      let { data } = response;
+      console.log(data);
+      setPlants([])
+      searchGarden()
+    } catch (error) {
+      alert("Error occurred, please try again...");
+    }
 }
+  
 
 const handleUpdate = async (e) => {
   e.preventDefault();
@@ -48,12 +91,6 @@ const handleUpdate = async (e) => {
     <form onSubmit={handleBack}>
     <button id='back-button'><img src="https://img.icons8.com/material-rounded/48/000000/circled-chevron-left.png"/></button>
     </form>
-    {/* <form onSubmit={handleSave}>
-      <input type="text" name="id" value={plant._id} hidden/>
-      <input type="text" name="name" placeholder={plant.name}/>
-      <input type="text" name="description" placeholder={ plant.description}/>
-      <button className="button is-success">Save</button>
-    </form> */}
     <div>
     <form id="plant-show" onSubmit={handleSave}>
         <div className="column is-10 is-offset-1">
@@ -67,21 +104,27 @@ const handleUpdate = async (e) => {
             <div className="media">
               <div className="media-content">
               <label htmlFor="name">Name:</label>
-              <input type="text" name="name" placeholder={plant.name}/>
+              <input type="text" name="name" placeholder={ plant.name}></input>
               <br/>
               <label htmlFor="scientific_name">Scientific Name:</label>
-                <input type="text" name="scientific_name" placeholder={plant.scientific_name}/>
+                <input type="text" name="scientific_name" placeholder={plant.scientific_name}></input>
               </div>
             </div>
           </div>
           <div>
           <p>Description</p>
-          <textarea id='desc' type="text" name="description" placeholder={ plant.description}/>
+          <textarea id='desc' type="text" name="description" placeholder={plant.description}></textarea>
           </div>
-
-          <input class="plant-content content" placeholder={plant.sun}/>
+          <label htmlFor="sun">Sun Needed:</label>
+          <input name='sun' type="text" placeholder={plant.sun}></input>
+          <br/>
+          <label htmlFor="sowing_method">Sowing Mehtod:</label>
+          <textarea id='sowing' name='sowing_method' type="text" placeholder={plant.sowing_method}></textarea>
+          <br/>
+          <label htmlFor="spacing">Spacing:</label>
+          <input name='spacing' type="text" placeholder={plant.spacing}/>
           <footer class="card-footer">
-          <input type="text" name='id' value={plant._id} hidden/>
+          <input type="text"  name='id' value={plant._id} hidden/>
           <button className="button is-success">Save</button>
           </footer>
         </div>

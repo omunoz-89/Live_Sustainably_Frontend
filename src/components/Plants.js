@@ -15,6 +15,28 @@ const Plants = (props) => {
   const handleAdd = async (e) => {
     e.preventDefault();
     console.log(e.target)
+    if(!e.target.sowing_method && !e.target.sun && !e.target.spacing){
+      let payload = {
+        name: e.target.name.value,
+        plant_id: e.target.plant_id.value,
+        scientific_name: e.target.scientific_name.value,
+        description: e.target.description.value,
+        image_url: e.target.image_url.value,
+        user_id: props.user.id,
+        sowing_method: 'sowing method',
+        sun: 'sun needed',
+        spacing: 'space needed',
+      };
+      console.log(payload);
+      let url = CONNECTION_URI + "/api/gardens";
+      try {
+        let response = await axios.post(url, payload);
+        let { data } = response;
+        console.log(data);
+      } catch (error) {
+        alert("Error occurred, please try again...");
+      }
+    } else {
     let payload = {
       name: e.target.name.value,
       plant_id: e.target.plant_id.value,
@@ -35,7 +57,7 @@ const Plants = (props) => {
     } catch (error) {
       alert("Error occurred, please try again...");
     }
-  
+    }
   };
 
   // const apiGet = async () => {
@@ -185,7 +207,7 @@ const Plants = (props) => {
         <div className="card">
           <div className="card-image">
             <figure className="image is-4by3">
-              <img src={search.thumbnail_url}/>
+              <img src="https://bulma.io/images/placeholders/1280x960.png"/>
             </figure>
           </div>
           <div className="card-content">
@@ -195,6 +217,13 @@ const Plants = (props) => {
                   {search.name}
                 </p>
               </div>
+            </div>
+            <div class="plant-content content">
+              <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. 
+                Tempore dolorum excepturi, pariatur dolore fuga perferendis 
+                mollitia deserunt a voluptas assumenda! Consequatur beatae qui 
+                dolorem tempora possimus accusantium, fugit eius quidem?
+            </p>
             </div>
           </div>
           <footer class="card-footer">

@@ -48,12 +48,46 @@ const handleUpdate = async (e) => {
     <form onSubmit={handleBack}>
     <button id='back-button'><img src="https://img.icons8.com/material-rounded/48/000000/circled-chevron-left.png"/></button>
     </form>
-    <form onSubmit={handleSave}>
+    {/* <form onSubmit={handleSave}>
       <input type="text" name="id" value={plant._id} hidden/>
       <input type="text" name="name" placeholder={plant.name}/>
       <input type="text" name="description" placeholder={ plant.description}/>
       <button className="button is-success">Save</button>
-    </form>
+    </form> */}
+    <div>
+    <form id="plant-show" onSubmit={handleSave}>
+        <div className="column is-10 is-offset-1">
+        <div className="card">
+          <div className="card-image">
+            <figure className="image is-4by3">
+              <img src={plant.image_url} alt="Placeholder image" />
+            </figure>
+          </div>
+          <div className="card-content">
+            <div className="media">
+              <div className="media-content">
+              <label htmlFor="name">Name:</label>
+              <input type="text" name="name" placeholder={plant.name}/>
+              <br/>
+              <label htmlFor="scientific_name">Scientific Name:</label>
+                <input type="text" name="scientific_name" placeholder={plant.scientific_name}/>
+              </div>
+            </div>
+          </div>
+          <div>
+          <p>Description</p>
+          <textarea id='desc' type="text" name="description" placeholder={ plant.description}/>
+          </div>
+
+          <input class="plant-content content" placeholder={plant.sun}/>
+          <footer class="card-footer">
+          <input type="text" name='id' value={plant._id} hidden/>
+          <button className="button is-success">Save</button>
+          </footer>
+        </div>
+      </div>
+      </form>
+      </div>
       </div>
   )
 }

@@ -9,20 +9,20 @@ const Navbar = (props) => {
   const CONNECTION_URI = process.env.REACT_APP_SERVER_URL;
 
     return (
-        <nav className="navbar is-success is-light" role="navigation" aria-label="main navigation">
+        <nav className="navbar is-success is-light is-fixed-top" role="navigation" aria-label="main navigation">
   <div className="navbar-brand">
-    <a className="navbar-item" id='logo' href="/">
+    {/* <a className="navbar-item" id='logo' href="/">
       <img id="logo-img" src="https://res.cloudinary.com/sei412-om/image/upload/v1625163518/liveS_dlagci.png"/>
-    </a>
+    </a> */}
 
-    <a role="button" className="navbar-burger" aria-label="menu" aria-expanded="false" data-target="navbarBasicExample">
-      <span aria-hidden="true"></span>
-      <span aria-hidden="true"></span>
-      <span aria-hidden="true"></span>
-    </a>
   </div>
+  <a role="button" class="navbar-burger" data-target="navMenu" aria-label="menu" aria-expanded="false">
+  <span aria-hidden="true"></span>
+  <span aria-hidden="true"></span>
+  <span aria-hidden="true"></span>
+</a>
 
-  <div className="navbar-menu">
+  <div className="navbar-menu" id='navMenu'>
     <div className="navbar-start">
       <NavLink className="navbar-item" exact to="/">Home</NavLink>
       <NavLink className="navbar-item"  to="/about">About</NavLink>

@@ -5,13 +5,10 @@ const Welcome = () => {
     <div className="background">
       <div className="layer">
         <div id="welcome-text">
-          <h1 id="welcome-title">Welcome</h1>
-          <p>Grow more food...</p>
+          <h1 id="welcome-title"><strong>Welcome to</strong> Live Sustainably</h1>
+          <h2></h2>
           <p>
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Tempore
-            dolorum excepturi, pariatur dolore fuga perferendis mollitia
-            deserunt a voluptas assumenda! Consequatur beatae qui dolorem
-            tempora possimus accusantium, fugit eius quidem?
+            Search and add plants to your garden. Document progress of plant growth and update plant details that have worked for you. Enjoy, there is more to come!
           </p>
         </div>
       </div>

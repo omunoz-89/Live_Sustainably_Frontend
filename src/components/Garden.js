@@ -247,7 +247,7 @@ const Garden = (props) => {
     setData(data);
     const plantList = await data.gardens.map((p, idx) => {
       return (
-        <div className="column is-4">
+        <div className="column is-3">
           <div className="card" key={idx}>
             <div className="card-image">
               <figure className="image is-4by3">
@@ -265,19 +265,19 @@ const Garden = (props) => {
               </div>
             </div>
             <footer class="card-footer columns">
-              <form onSubmit={handleDelete} className="column is-2">
-                <input type="text" value={p._id} name="_id" hidden />
+            <form onSubmit={handleView} className="card-form card-footer-item">
+                <input type="text" value={p._id} name="id" hidden />
                 <div class="control">
-                  <button class="button is-danger is-light card-footer-item">
-                    Delete
+                  <button type='submit' class="card-view button">
+                  <p>{''}View{''}</p>
                   </button>
                 </div>
               </form>
-              <form onSubmit={handleView} className="column is-2 is-offset-1">
-                <input type="text" value={p._id} name="id" hidden />
+              <form onSubmit={handleDelete} className="card-form card-footer-item">
+                <input type="text" value={p._id} name="_id" hidden />
                 <div class="control">
-                  <button class="button is-warning is-light card-footer-item">
-                    View
+                  <button class="card-del button">
+                    Delete
                   </button>
                 </div>
               </form>
@@ -295,6 +295,6 @@ const Garden = (props) => {
     searchGarden();
   }, []);
 
-  return <div className="columns is-multiline">{plants}</div>;
+  return <div id="garden" className="columns is-multiline">{plants}</div>;
 };
 export default Garden;

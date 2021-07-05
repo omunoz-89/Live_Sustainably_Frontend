@@ -14,6 +14,7 @@ body {
   padding: 0;
   line-height: 50px; /* Vertically center the text there */
   color: rgb(74, 198, 142);
+  background-color: rgba(80, 79, 79, 0.575);
 }
 
 #logo {
@@ -21,10 +22,6 @@ body {
   padding: 0;
 }
 
-#logo-img {
-  width: 12vw;
-  margin-left: 10px;
-}
 
 .background {
   background-image: url("https://res.cloudinary.com/sei412-om/image/upload/v1625164957/IMG_20200418_191358_shmwju.jpg");
@@ -37,8 +34,28 @@ body {
   border-radius: 5px;
 }
 
+.about-background {
+  background-image: url("https://res.cloudinary.com/sei412-om/image/upload/v1625526121/IMG_20200531_151312_jb4jup.jpg");
+  position: relative;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  min-width: 80vw;
+  height: 80vh;
+  border-radius: 5px;
+}
+
 .layer {
-  background-color: rgba(244, 255, 223, 0.281);
+  background-color: rgba(244, 255, 223, 0.212);
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.about-layer {
+  background-color: rgba(244, 255, 223, 0.247);
   position: absolute;
   top: 0;
   left: 0;
@@ -47,16 +64,18 @@ body {
 }
 
 #welcome-text {
-  background-color: rgba(255, 255, 255, 0.671);
+  background-color: rgba(240, 237, 231, 0.856);
   margin: 30vh 15vw 0 15vw;
   border-radius: 10px;
   padding: 5px;
+  text-align: center;
 }
 
 #welcome-title {
   text-align: center;
   font-size: 2rem;
   font-weight: 800;
+  color: rgb(74,198,142);
 }
 
 #search {
@@ -65,12 +84,13 @@ body {
 
 #loading {
   margin: 0 auto;
-  margin-top: 20vh;
-  width: 100%;
-  height: 100%;
+  margin-top: 1vh;
+  width: 100vw;
+  height: 80vh;
   border: none;
   font-size: 5rem;
   font-weight: bold;
+
 }
 
 .search-bar {
@@ -113,4 +133,37 @@ button {
   resize: none;
   width: 100%;
   height: 5vh;
+}
+
+#form-title {
+  font-size: 1.4rem;
+  font-weight: 900;
+  color: rgb(147,146,144);
+
+}
+
+#garden {
+  padding-bottom: 15px;
+}
+
+.card-form {
+  padding: 0;
+  margin: 0 0 0 5px;
+  width: 100%;
+}
+
+.card-del {
+  background:none;
+  margin: 0 auto;
+  padding: 5px 30px 5px 20px;
+  border: none;
+  width: 100%;
+}
+
+.card-view {
+  background:none;
+  margin: 0 auto;
+  padding: 5px 30px 5px 30px;
+  border: none;
+  width: 100%;
 }

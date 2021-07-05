@@ -60,7 +60,7 @@ const Signup = () => {
     <div className="columns">
       <div className="column is-4 is-offset-4">
         <div className="card">
-          <h2 className="column is-2 is-offset-5">Signup</h2>
+          <h2 id='form-title' className="column is-2 is-offset-5">Signup</h2>
           <form onSubmit={handleSubmit} className="field">
             <div className="field column">
               <label htmlFor="name" className="label">
@@ -114,7 +114,7 @@ const Signup = () => {
               <button
                 id="signup-btn"
                 type="submit"
-                className="column is-8 is-offset-2 button is-info is-small is-fullwidth"
+                className="column is-8 is-offset-2 button is-info is-medium is-fullwidth"
               >
                 Submit
               </button>

@@ -79,6 +79,16 @@ body {
   padding:none;
 }
 
+.plant-content {
+  margin: 10px;
+  padding: 10px;
+}
+
 button {
   margin: 8px;
+}
+
+#back-button {
+  border: none;
+  background:none;
 }

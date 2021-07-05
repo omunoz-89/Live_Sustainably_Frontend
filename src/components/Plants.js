@@ -14,6 +14,7 @@ const Plants = (props) => {
 
   const handleAdd = async (e) => {
     e.preventDefault();
+    console.log(e.target)
     let payload = {
       name: e.target.name.value,
       plant_id: e.target.plant_id.value,
@@ -34,6 +35,7 @@ const Plants = (props) => {
     } catch (error) {
       alert("Error occurred, please try again...");
     }
+  
   };
 
   // const apiGet = async () => {
@@ -44,8 +46,9 @@ const Plants = (props) => {
 
   const handleSearch = async (e) => {
     e.preventDefault();
+    let value = e.target.search.value.split(' ').join('-');
     const resp = await axios.get(
-      CONNECTION_URI + `/api/plants/search/${e.target.search.value}`
+      CONNECTION_URI + `/api/plants/search/${value}`
     );
     const data = await resp.data;
     setSearch(data)
@@ -87,8 +90,8 @@ const Plants = (props) => {
     } else {
       setSearchBar(
         <div className='columns' >
-      <form onSubmit='handleBack' class="search-bar column is-1 is-offset-1">
-      <button className='button is-dark'>Back</button>
+      <form onSubmit='handleBack' class="search-bar column is-2">
+      <button id='back-button'><img src="https://img.icons8.com/material-rounded/48/000000/circled-chevron-left.png"/></button>
       </form>
         <form onSubmit={handleSearch} className='search-bar column is-9'>
         <input
@@ -175,6 +178,33 @@ const Plants = (props) => {
     
     } else{
       const plant = search.openfarm_data.attributes
+        if(plant === undefined){
+          setPlants(
+            <div id="plant-show">
+        <div className="column is-10 is-offset-1">
+        <div className="card">
+          <div className="card-image">
+            <figure className="image is-4by3">
+              <img src={search.thumbnail_url}/>
+            </figure>
+          </div>
+          <div className="card-content">
+            <div className="media">
+              <div className="media-content">
+                <p className="title is-4" id="plant-name">
+                  {search.name}
+                </p>
+              </div>
+            </div>
+          </div>
+          <footer class="card-footer">
+          </footer>
+        </div>
+      </div>
+      </div>
+          )
+        } else {
+      
       console.log(plant)
       setPlants(
         <div id="plant-show">
@@ -195,8 +225,13 @@ const Plants = (props) => {
               </div>
             </div>
           </div>
-          <div class="content">
+          <div class="plant-content content">
       {plant.description}
+      <ul>
+      <li>Sun Required: {plant.sun_requirements}</li>
+      <li>Sowing Mehtod: {plant.sowing_method}</li>
+      <li>Row Spacing: {plant.row_spacing}cm</li>
+      </ul>
     </div>
           <footer class="card-footer">
             <form onSubmit={handleAdd}>
@@ -249,6 +284,7 @@ const Plants = (props) => {
       </div>
       </div>
       )
+        }
     }
   };
 

@@ -17,6 +17,97 @@ const Garden = (props) => {
     searchGarden()
 }
 
+const handleBack = async (e) => {
+  e.preventDefault();
+  searchGarden()
+};
+
+const handleSave = async (e) => {
+  e.preventDefault();
+  let payload = {
+    id: e.target.id.value,
+    name: e.target.name.value,
+  }
+  try {
+    let response = await axios.put(CONNECTION_URI + `/api/gardens/${id}`, payload)
+    let { data } = response;
+    console.log(data);
+  } catch (error) {
+    alert("Error occurred, please try again...");
+  }
+}
+
+const handleUpdate = async (e) => {
+  e.preventDefault();
+  let id = e.target.id.value
+  const getPlant = await axios.get(CONNECTION_URI + `/api/gardens/${id}`)
+  console.log(getPlant)
+  let plant = getPlant.data.garden[0] 
+  setPlants(
+    <div>
+    <form onSubmit={handleBack}>
+    <button id='back-button'><img src="https://img.icons8.com/material-rounded/48/000000/circled-chevron-left.png"/></button>
+    </form>
+    <form onSubmit={handleSave}>
+      <input type="text" name="id" value={plant._id} hidden/>
+      <input type="text" name="name" placeholder={plant.name}/>
+      <input type="text" name="description" placeholder={ plant.description}/>
+      <button className="button is-success">Save</button>
+    </form>
+      </div>
+  )
+}
+
+const handleView = async (e) => {
+  e.preventDefault();
+  let id = e.target.id.value
+  const getPlant = await axios.get(CONNECTION_URI + `/api/gardens/${id}`)
+  console.log(getPlant)
+  let plant = getPlant.data.garden[0]
+  setPlants(
+    <div>
+    <form onSubmit={handleBack}>
+    <button id='back-button'><img src="https://img.icons8.com/material-rounded/48/000000/circled-chevron-left.png"/></button>
+    </form>
+    <div id="plant-show">
+        <div className="column is-10 is-offset-1">
+        <div className="card">
+          <div className="card-image">
+            <figure className="image is-4by3">
+              <img src={plant.image_url} alt="Placeholder image" />
+            </figure>
+          </div>
+          <div className="card-content">
+            <div className="media">
+              <div className="media-content">
+                <p className="title is-4" id="plant-name">
+                  {plant.name}
+                </p>
+                <p className="subtitle is-6">{plant.scientific_name}</p>
+              </div>
+            </div>
+          </div>
+          <div class="plant-content content">
+      {plant.description}
+      <ul>
+      <li>Sun Required: {plant.sun}</li>
+      <li>Sowing Mehtod: {plant.sowing_method}</li>
+      <li>Row Spacing: {plant.spacing}cm</li>
+      </ul>
+    </div>
+          <footer class="card-footer">
+          <form onSubmit={handleUpdate}>
+          <input type="text" name='id' value={plant._id} hidden/>
+            <button className="button is-info is light">Update</button>
+          </form>
+          </footer>
+        </div>
+      </div>
+      </div>
+      </div>
+  )
+}
+
   const searchGarden = async () => {
     const resp = await axios.get(CONNECTION_URI + `/api/gardens/user/${id}`);
     const data = await resp.data;
@@ -38,11 +129,17 @@ const Garden = (props) => {
       </div>
     </div>
   </div>
-  <footer class="card-footer">
-  <form onSubmit={handleDelete}>
+  <footer class="card-footer columns">
+  <form onSubmit={handleDelete} className='column is-2'>
   <input type="text" value={p._id} name="_id" hidden/>
   <div class="control">
   <button class="button is-danger is-light card-footer-item">Delete</button>
+  </div>
+  </form>
+  <form onSubmit={handleView} className='column is-2 is-offset-1'>
+  <input type="text" value={p._id} name="id" hidden/>
+  <div class="control">
+  <button class="button is-primary is-light card-footer-item">View</button>
   </div>
   </form>
   </footer>

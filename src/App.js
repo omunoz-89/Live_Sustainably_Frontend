@@ -15,6 +15,8 @@ import Login from "./components/Login";
 import About from "./components/About";
 import Plants from "./components/Plants";
 import Garden from "./components/Garden";
+import Show from "./components/Show";
+
 
 
 
@@ -73,6 +75,7 @@ function App() {
           <Route path='/about' component={About} />
           <PrivateRoute path='/plants' component={Plants} user={currentUser}/>
           <PrivateRoute path='/garden' component={Garden} user={currentUser}/>
+          <PrivateRoute path='/show' component={Show} user={currentUser}/>
           <Route exact path='/' component={Welcome}/>
           <PrivateRoute path='/profile' component={Profile} user={currentUser} handleLogout={handleLogout} />
         </Switch>

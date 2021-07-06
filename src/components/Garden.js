@@ -5,8 +5,16 @@ import { Redirect, Route } from "react-router-dom";
 const Garden = (props) => {
   const [plants, setPlants] = useState([]);
   const [data, setData] = useState();
-  const id = props.user.id;
   const CONNECTION_URI = process.env.REACT_APP_SERVER_URL;
+  const { handleLogout } = props;
+  const { exp, id } = props.user;
+  const expirationTime = new Date(exp * 1000);
+  let currentTime = Date.now();
+
+  if (currentTime >= expirationTime) {
+      handleLogout();
+      alert('Session has ended. Please login again.');
+  }
 
   const handleDelete = async (e) => {
     e.preventDefault();

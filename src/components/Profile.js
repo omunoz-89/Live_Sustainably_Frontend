@@ -6,21 +6,25 @@ const Profile = (props) => {
     const { exp, id, name, email } = props.user;
     const expirationTime = new Date(exp * 1000);
     let currentTime = Date.now();
-    console.log(String(expirationTime));
-    console.log(props)
-    console.log(props.user)
+
+
 
     if (currentTime >= expirationTime) {
         handleLogout();
         alert('Session has ended. Please login again.');
     }
     const userData = props.user ? 
-    (<div>
-        <h1>Profile</h1>
-        <p><strong>Name:</strong> { name }</p> 
-        <p><strong>Email:</strong> { email }</p> 
-        <p><strong>ID:</strong> { id }</p>
-    </div>) : <h4>Loading...</h4>
+    (<div className="columns">
+        <div className="column is-4 is-offset-4">
+        <div className="card">
+        <h2 id='form-title' className="column is-2 is-offset-4">Profile</h2>
+        <p className="column"><strong>Name:</strong> {name}</p>
+        <p className="column"><strong>Email:</strong> {email}</p>
+        <p className="column"><strong>ID:</strong> {id}</p>
+        </div>
+        </div>
+    </div>) 
+    : <h4>Loading...</h4>
 
     const errorDiv = () => {
         return (

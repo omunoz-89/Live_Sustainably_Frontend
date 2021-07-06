@@ -176,7 +176,7 @@ const Garden = (props) => {
                 <textarea id="note" type="text" name="note"></textarea>
 
                 <footer className="card-footer">
-                  <input type="text" name="id" value={plant._id} hidden />
+                  <input type="text" name="id" defaultValue={plant._id} hidden />
                   <button className="button is-success">Save</button>
                 </footer>
               </div>
@@ -232,7 +232,7 @@ const Garden = (props) => {
               </div>
               <footer className="card-footer">
                 <form onSubmit={handleUpdate}>
-                  <input type="text" name="id" value={plant._id} hidden />
+                  <input type="text" name="id" defaultValue={plant._id} hidden />
                   <button className="button is-info is light">Update</button>
                 </form>
               </footer>
@@ -268,7 +268,7 @@ const Garden = (props) => {
             </div>
             <footer className="card-footer columns">
             <form onSubmit={handleView} className="card-form card-footer-item">
-                <input type="text" value={p._id} name="id" hidden />
+                <input type="text" defaultValue={p._id} name="id" hidden />
                 <div className="control">
                   <button type='submit' className="card-view button">
                   <p>{''}View{''}</p>
@@ -276,7 +276,7 @@ const Garden = (props) => {
                 </div>
               </form>
               <form onSubmit={handleDelete} className="card-form card-footer-item">
-                <input type="text" value={p._id} name="_id" hidden />
+                <input type="text" defaultValue={p._id} name="_id" hidden />
                 <div className="control">
                   <button className="card-del button">
                     Delete

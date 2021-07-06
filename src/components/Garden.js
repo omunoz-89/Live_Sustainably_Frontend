@@ -116,7 +116,7 @@ const Garden = (props) => {
       <div>
         <form onSubmit={handleBack}>
           <button id="back-button">
-            <img src="https://img.icons8.com/material-rounded/48/000000/circled-chevron-left.png" />
+            <img src="https://img.icons8.com/material-rounded/48/000000/circled-chevron-left.png"/>
           </button>
         </form>
         <div>
@@ -297,12 +297,16 @@ const Garden = (props) => {
     setPlants(plantList);
   };
 
-  if (id === undefined) return <Redirect to="/"></Redirect>;
-
+  // if (id === undefined) return <Redirect to='/'></Redirect>
+  
   useEffect(() => {
     searchGarden();
   }, []);
 
-  return <div id="garden" className="columns is-multiline">{plants}</div>;
+  return (
+    <div className="columns is-multiline">
+    {plants}
+    </div>
+  );
 };
 export default Garden;

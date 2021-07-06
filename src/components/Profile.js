@@ -7,8 +7,6 @@ const Profile = (props) => {
     const expirationTime = new Date(exp * 1000);
     let currentTime = Date.now();
 
-
-
     if (currentTime >= expirationTime) {
         handleLogout();
         alert('Session has ended. Please login again.');

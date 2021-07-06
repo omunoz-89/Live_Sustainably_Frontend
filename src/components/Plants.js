@@ -1,20 +1,16 @@
 import React, { useState, useEffect } from "react";
-import { Redirect } from "react-router-dom";
 import axios from "axios";
 
 const Plants = (props) => {
-  console.log(props);
   const [plants, setPlants] = useState(<button className="button is-loading" id="loading" >Loading</button>
   );
   const [search, setSearch] = useState('empty');
   const [searchBar, setSearchBar] = useState();
-  console.log(search);
   const [data, setData] = useState('empty');
   const CONNECTION_URI = process.env.REACT_APP_SERVER_URL;
 
   const handleAdd = async (e) => {
     e.preventDefault();
-    console.log(e.target)
     if(!e.target.sowing_method && !e.target.sun && !e.target.spacing){
       let payload = {
         name: e.target.name.value,
@@ -27,12 +23,10 @@ const Plants = (props) => {
         sun: 'sun needed',
         spacing: 'space needed',
       };
-      console.log(payload);
       let url = CONNECTION_URI + "/api/gardens";
       try {
         let response = await axios.post(url, payload);
         let { data } = response;
-        console.log(data);
       } catch (error) {
         alert("Error occurred, please try again...");
       }
@@ -48,12 +42,10 @@ const Plants = (props) => {
       sun: e.target.sun.value,
       spacing: e.target.spacing.value,
     };
-    console.log(payload);
     let url = CONNECTION_URI + "/api/gardens";
     try {
       let response = await axios.post(url, payload);
       let { data } = response;
-      console.log(data);
     } catch (error) {
       alert("Error occurred, please try again...");
     }
@@ -77,14 +69,12 @@ const Plants = (props) => {
 
   const handleView = async (e) => {
     e.preventDefault();
-    console.log(e.target.plant_id.value)
     const resp = await axios.get(
       CONNECTION_URI + `/api/plants/search/${e.target.plant_id.value}`
     );
     const data = await resp.data;
     setData(data);
     setSearch(data)
-    console.log(data);
   };
 
   const searchB = () => {
@@ -92,9 +82,9 @@ const Plants = (props) => {
       setSearchBar(
         <div className='columns'>
         <div className='column is-10 is-offset-1'>
-      <form onSubmit={handleSearch} class="search-bar ">
+      <form onSubmit={handleSearch} className="search-bar ">
       <input
-          class="input"
+          className="input"
           id="search"
           name="search"
           type="text"
@@ -106,12 +96,12 @@ const Plants = (props) => {
     } else {
       setSearchBar(
         <div className='columns' >
-      <form onSubmit='handleBack' class="search-bar column is-2">
-      <button id='back-button'><img src="https://img.icons8.com/material-rounded/48/000000/circled-chevron-left.png"/></button>
+      <form onSubmit='handleBack' className="search-bar column is-2">
+      <button id='back-button'><img src="https://img.icons8.com/material-rounded/48/000000/circled-chevron-left.png" alt="back_button" /></button>
       </form>
         <form onSubmit={handleSearch} className='search-bar column is-9'>
         <input
-          class="navbar-item input"
+          className="navbar-item input"
           id="search"
           name="search"
           type="text"
@@ -128,14 +118,13 @@ const Plants = (props) => {
       const resp = await axios.get(CONNECTION_URI + "/api/plants");
       const data = await resp.data;
       setData(data);
-      console.log(data)
       const plantList = await data.map((p, idx) => {
         return (
           <div className="column is-3">
             <div className="card" key={idx}>
               <div className="card-image">
                 <figure className="image is-4by3">
-                  <img src={p.thumbnail_url} alt="Placeholder image" />
+                  <img src={p.thumbnail_url} alt={p.name} />
                 </figure>
               </div>
               <div className="card-content">
@@ -148,7 +137,7 @@ const Plants = (props) => {
                   </div>
                 </div>
               </div>
-              <footer class="card-footer">
+              <footer className="card-footer">
                 <form onSubmit={handleAdd} className='card-form card-footer-item'>
                   <input type="text" value={p.name} name="name" hidden />
                   <input type="text" value={p._id} name="plant_id" hidden />
@@ -170,16 +159,16 @@ const Plants = (props) => {
                     name="image_url"
                     hidden
                   />
-                  <div class="control">
-                    <button class="card-view button">
+                  <div className="control">
+                    <button className="card-view button">
                       Add
                     </button>
                   </div>
                 </form>
                 <form onSubmit={handleView} className='card-form card-footer-item'>
                   <input type="text" value={p._id} name="plant_id" hidden />
-                  <div class="control">
-                    <button class="card-view button">
+                  <div className="control">
+                    <button className="card-view button">
                       View
                     </button>
                   </div>{" "}
@@ -200,7 +189,7 @@ const Plants = (props) => {
         <div className="card">
           <div className="card-image">
             <figure className="image is-4by3">
-              <img src="https://bulma.io/images/placeholders/1280x960.png"/>
+              <img src="https://bulma.io/images/placeholders/1280x960.png" alt='blank_image'/>
             </figure>
           </div>
           <div className="card-content">
@@ -211,7 +200,7 @@ const Plants = (props) => {
                 </p>
               </div>
             </div>
-            <div class="plant-content content">
+            <div className="plant-content content">
               <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. 
                 Tempore dolorum excepturi, pariatur dolore fuga perferendis 
                 mollitia deserunt a voluptas assumenda! Consequatur beatae qui 
@@ -219,7 +208,7 @@ const Plants = (props) => {
             </p>
             </div>
           </div>
-          <footer class="card-footer">
+          <footer className="card-footer">
           </footer>
         </div>
       </div>
@@ -227,14 +216,13 @@ const Plants = (props) => {
           )
         } else {
       
-      console.log(plant)
       setPlants(
         <div id="plant-show">
         <div className="column is-10 is-offset-1">
         <div className="card">
           <div className="card-image">
             <figure className="image is-4by3">
-              <img src={plant.main_image_path} alt="Placeholder image" />
+              <img src={plant.main_image_path} alt={plant.name} />
             </figure>
           </div>
           <div className="card-content">
@@ -247,7 +235,7 @@ const Plants = (props) => {
               </div>
             </div>
           </div>
-          <div class="plant-content content">
+          <div className="plant-content content">
       {plant.description}
       <ul>
       <li>Sun Required: {plant.sun_requirements}</li>
@@ -255,7 +243,7 @@ const Plants = (props) => {
       <li>Row Spacing: {plant.row_spacing}cm</li>
       </ul>
     </div>
-          <footer class="card-footer">
+          <footer className="card-footer">
             <form onSubmit={handleAdd}>
               <input type="text" value={plant.name} name="name" hidden />
               <input type="text" value={data.id} name="plant_id" hidden />
@@ -295,8 +283,8 @@ const Plants = (props) => {
                 name="spacing"
                 hidden
               />
-              <div class="control">
-                <button class="button is-success is-light card-footer-item">
+              <div className="control">
+                <button className="button is-success is-light card-footer-item">
                   Add
                 </button>
               </div>

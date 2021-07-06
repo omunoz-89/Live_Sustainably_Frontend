@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import { Redirect, Route } from "react-router-dom";
 
 const Garden = (props) => {
   const [plants, setPlants] = useState([]);
@@ -97,9 +96,6 @@ const Garden = (props) => {
         payload
       );
       let { data } = response;
-      console.log(data);
-      // setPlants([])
-      // searchGarden()
       handleView(e);
     } catch (error) {
       alert("Error occurred, please try again...");
@@ -110,13 +106,12 @@ const Garden = (props) => {
     e.preventDefault();
     let id = e.target.id.value;
     const getPlant = await axios.get(CONNECTION_URI + `/api/gardens/${id}`);
-    console.log(getPlant);
     let plant = getPlant.data.garden[0];
     setPlants(
       <div>
         <form onSubmit={handleBack}>
           <button id="back-button">
-            <img src="https://img.icons8.com/material-rounded/48/000000/circled-chevron-left.png"/>
+            <img src="https://img.icons8.com/material-rounded/48/000000/circled-chevron-left.png" alt="back_button"/>
           </button>
         </form>
         <div>
@@ -125,7 +120,7 @@ const Garden = (props) => {
               <div className="card">
                 <div className="card-image">
                   <figure className="image is-4by3">
-                    <img src={plant.image_url} />
+                    <img src={plant.image_url} alt={plant.name}/>
                   </figure>
                 </div>
                 <label htmlFor="image">Image URL:</label>
@@ -180,7 +175,7 @@ const Garden = (props) => {
                 <label htmlFor="note">Add Notes:</label>
                 <textarea id="note" type="text" name="note"></textarea>
 
-                <footer class="card-footer">
+                <footer className="card-footer">
                   <input type="text" name="id" value={plant._id} hidden />
                   <button className="button is-success">Save</button>
                 </footer>
@@ -196,7 +191,6 @@ const Garden = (props) => {
     e.preventDefault();
     let id = e.target.id.value;
     const getPlant = await axios.get(CONNECTION_URI + `/api/gardens/${id}`);
-    console.log(getPlant);
     let plant = getPlant.data.garden[0];
     const noteList = await plant.notes.map((n, idx) => {
       return <li key={idx}>{n}</li>;
@@ -205,7 +199,7 @@ const Garden = (props) => {
       <div>
         <form onSubmit={handleBack}>
           <button id="back-button">
-            <img src="https://img.icons8.com/material-rounded/48/000000/circled-chevron-left.png" />
+            <img src="https://img.icons8.com/material-rounded/48/000000/circled-chevron-left.png" alt="back_button" />
           </button>
         </form>
         <div id="plant-show">
@@ -213,7 +207,7 @@ const Garden = (props) => {
             <div className="card">
               <div className="card-image">
                 <figure className="image is-4by3">
-                  <img src={plant.image_url} alt="Placeholder image" />
+                  <img src={plant.image_url} alt={plant.name} />
                 </figure>
               </div>
               <div className="card-content">
@@ -226,7 +220,7 @@ const Garden = (props) => {
                   </div>
                 </div>
               </div>
-              <div class="plant-content content">
+              <div className="plant-content content">
                 {plant.description}
                 <ul>
                   <li>Sun Required: {plant.sun}</li>
@@ -236,7 +230,7 @@ const Garden = (props) => {
                 <h5>Notes:</h5>
                 <ul>{noteList}</ul>
               </div>
-              <footer class="card-footer">
+              <footer className="card-footer">
                 <form onSubmit={handleUpdate}>
                   <input type="text" name="id" value={plant._id} hidden />
                   <button className="button is-info is light">Update</button>
@@ -259,7 +253,7 @@ const Garden = (props) => {
           <div className="card" key={idx}>
             <div className="card-image">
               <figure className="image is-4by3">
-                <img src={p.image_url} alt="Placeholder image" />
+                <img src={p.image_url} alt={p.name} />
               </figure>
             </div>
             <div className="card-content">
@@ -272,19 +266,19 @@ const Garden = (props) => {
                 </div>
               </div>
             </div>
-            <footer class="card-footer columns">
+            <footer className="card-footer columns">
             <form onSubmit={handleView} className="card-form card-footer-item">
                 <input type="text" value={p._id} name="id" hidden />
-                <div class="control">
-                  <button type='submit' class="card-view button">
+                <div className="control">
+                  <button type='submit' className="card-view button">
                   <p>{''}View{''}</p>
                   </button>
                 </div>
               </form>
               <form onSubmit={handleDelete} className="card-form card-footer-item">
                 <input type="text" value={p._id} name="_id" hidden />
-                <div class="control">
-                  <button class="card-del button">
+                <div className="control">
+                  <button className="card-del button">
                     Delete
                   </button>
                 </div>
@@ -296,8 +290,6 @@ const Garden = (props) => {
     });
     setPlants(plantList);
   };
-
-  // if (id === undefined) return <Redirect to='/'></Redirect>
   
   useEffect(() => {
     searchGarden();

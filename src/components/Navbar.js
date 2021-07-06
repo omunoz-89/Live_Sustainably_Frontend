@@ -1,22 +1,14 @@
 import React from 'react';
-import { NavLink, Link } from 'react-router-dom';
-import axios from "axios";
+import { NavLink} from 'react-router-dom';
 
 
 
 
 const Navbar = (props) => {
-  const CONNECTION_URI = process.env.REACT_APP_SERVER_URL;
 
     return (
         <nav className="navbar is-success is-light is-fixed-top" role="navigation" aria-label="main navigation">
-  <div className="navbar-brand">
-    {/* <a className="navbar-item" id='logo' href="/">
-      <img id="logo-img" src="https://res.cloudinary.com/sei412-om/image/upload/v1625163518/liveS_dlagci.png"/>
-    </a> */}
-
-  </div>
-  <a role="button" class="navbar-burger" data-target="navMenu" aria-label="menu" aria-expanded="false">
+  <a role="button" className="navbar-burger" data-target="navMenu" aria-label="menu" aria-expanded="false">
   <span aria-hidden="true"></span>
   <span aria-hidden="true"></span>
   <span aria-hidden="true"></span>

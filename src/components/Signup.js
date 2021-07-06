@@ -36,7 +36,6 @@ const Signup = () => {
       try {
         let response = await axios.post(url, payload);
         let { data } = response;
-        console.log(data);
         setRedirect(true);
       } catch (error) {
         alert("Error occurred, please try again...");

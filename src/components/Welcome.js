@@ -6,7 +6,6 @@ const Welcome = () => {
       <div className="layer">
         <div id="welcome-text">
           <h1 id="welcome-title"><strong>Welcome to</strong> Live Sustainably</h1>
-          <h2></h2>
           <p>
             Search and add plants to your garden. Document progress of plant growth and update plant details that have worked for you. Enjoy, there is more to come!
           </p>

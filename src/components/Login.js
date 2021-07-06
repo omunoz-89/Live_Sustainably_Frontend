@@ -36,7 +36,6 @@ const Login = (props) => {
         props.nowCurrentUser(decoded);
       })
       .catch((error) => {
-        console.log(error);
         alert("Either email or password is incorrect. Please try again.");
       });
   };

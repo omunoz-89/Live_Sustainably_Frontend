@@ -15,20 +15,15 @@ import Login from "./components/Login";
 import About from "./components/About";
 import Plants from "./components/Plants";
 import Garden from "./components/Garden";
-import Show from "./components/Show";
-
-
 
 
 //Private route component
 const PrivateRoute = ({component: Component, ...rest}) => {
-  console.log('This is a private route')
   let user = localStorage.getItem('jwtToken')
   return <Route {...rest} render={ (props) => {
     return user ? <Component {...rest} {...props} /> : <Redirect to='/login' />
   }} />
 }
-
 
 function App() {
   // Set state values
@@ -40,18 +35,15 @@ function App() {
     let token;
     //if there is token inside of local storage, then the user is not authenticated
     if (!localStorage.getItem("jwtToken")) {
-      console.log("is not authenticated");
       setIsAuthenticated(false);
     } else {
       token = jwt_decode(localStorage.getItem("jwtToken"));
-      console.log("token", token);
       setAuthToken(token);
       setCurrentUser(token);
     }
   }, []);
   
   const nowCurrentUser = (userData) => {
-    console.log("--- inside nowCurrentUser ---");
     setCurrentUser(userData);
     setIsAuthenticated(true)
   };
@@ -75,7 +67,6 @@ function App() {
           <Route path='/about' component={About} />
           <PrivateRoute path='/plants' component={Plants} user={currentUser}/>
           <PrivateRoute path='/garden' component={Garden} user={currentUser}/>
-          <PrivateRoute path='/show' component={Show} user={currentUser}/>
           <Route exact path='/' component={Welcome}/>
           <PrivateRoute path='/profile' component={Profile} user={currentUser} handleLogout={handleLogout} />
         </Switch>

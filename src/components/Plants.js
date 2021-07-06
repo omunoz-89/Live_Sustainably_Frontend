@@ -139,23 +139,23 @@ const Plants = (props) => {
               </div>
               <footer className="card-footer">
                 <form onSubmit={handleAdd} className='card-form card-footer-item'>
-                  <input type="text" value={p.name} name="name" hidden />
-                  <input type="text" value={p._id} name="plant_id" hidden />
+                  <input type="text" defaultValue={p.name} name="name" hidden />
+                  <input type="text" defaultValue={p._id} name="plant_id" hidden />
                   <input
                     type="text"
-                    value={p.scientific_name}
+                    defaultValue={p.scientific_name}
                     name="scientific_name"
                     hidden
                   />
                   <input
                     type="text"
-                    value={p.description}
+                    defaultValue={p.description}
                     name="description"
                     hidden
                   />
                   <input
                     type="text"
-                    value={p.thumbnail_url}
+                    defaultValue={p.thumbnail_url}
                     name="image_url"
                     hidden
                   />
@@ -166,7 +166,7 @@ const Plants = (props) => {
                   </div>
                 </form>
                 <form onSubmit={handleView} className='card-form card-footer-item'>
-                  <input type="text" value={p._id} name="plant_id" hidden />
+                  <input type="text" defaultValue={p._id} name="plant_id" hidden />
                   <div className="control">
                     <button className="card-view button">
                       View
@@ -245,41 +245,41 @@ const Plants = (props) => {
     </div>
           <footer className="card-footer">
             <form onSubmit={handleAdd}>
-              <input type="text" value={plant.name} name="name" hidden />
-              <input type="text" value={data.id} name="plant_id" hidden />
+              <input type="text" defaultValue={plant.name} name="name" hidden />
+              <input type="text" defaultValue={data.id} name="plant_id" hidden />
               <input
                 type="text"
-                value={plant.binomial_name}
+                defaultValue={plant.binomial_name}
                 name="scientific_name"
                 hidden
               />
               <input
                 type="text"
-                value={plant.description}
+                defaultValue={plant.description}
                 name="description"
                 hidden
               />
               <input
                 type="text"
-                value={plant.main_image_path}
+                defaultValue={plant.main_image_path}
                 name="image_url"
                 hidden
               />
               <input
                 type="text"
-                value={plant.sowing_method}
+                defaultValue={plant.sowing_method}
                 name="sowing_method"
                 hidden
               />
               <input
                 type="text"
-                value={plant.sun_requirements}
+                defaultValue={plant.sun_requirements}
                 name="sun"
                 hidden
               />
               <input
                 type="text"
-                value={plant.row_spacing}
+                defaultValue={plant.row_spacing}
                 name="spacing"
                 hidden
               />

@@ -64,9 +64,9 @@ function App() {
         <Switch>
           <Route path='/signup' component={Signup}></Route>
           <Route path='/login' render={(props) => <Login {...props} user={currentUser} nowCurrentUser={nowCurrentUser} setIsAuthenticated={setIsAuthenticated} /> } />
-          <Route path='/about' component={About} />
-          <PrivateRoute path='/plants' component={Plants} user={currentUser}/>
-          <PrivateRoute path='/garden' component={Garden} user={currentUser}/>
+          <Route path='/about' component={About}/>
+          <PrivateRoute path='/plants' component={Plants} user={currentUser} handleLogout={handleLogout}/>
+          <PrivateRoute path='/garden' component={Garden} user={currentUser} handleLogout={handleLogout}/>
           <Route exact path='/' component={Welcome}/>
           <PrivateRoute path='/profile' component={Profile} user={currentUser} handleLogout={handleLogout} />
         </Switch>

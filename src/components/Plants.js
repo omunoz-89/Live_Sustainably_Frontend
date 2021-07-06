@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 
@@ -8,6 +9,15 @@ const Plants = (props) => {
   const [searchBar, setSearchBar] = useState();
   const [data, setData] = useState('empty');
   const CONNECTION_URI = process.env.REACT_APP_SERVER_URL;
+  const { handleLogout } = props;
+  const { exp } = props.user;
+  const expirationTime = new Date(exp * 1000);
+  let currentTime = Date.now();
+
+  if (currentTime >= expirationTime) {
+      handleLogout();
+      alert('Session has ended. Please login again.');
+  }
 
   const handleAdd = async (e) => {
     e.preventDefault();
@@ -25,8 +35,8 @@ const Plants = (props) => {
       };
       let url = CONNECTION_URI + "/api/gardens";
       try {
-        let response = await axios.post(url, payload);
-        let { data } = response;
+        await axios.post(url, payload);
+        // let { data } = response;
       } catch (error) {
         alert("Error occurred, please try again...");
       }
@@ -44,8 +54,8 @@ const Plants = (props) => {
     };
     let url = CONNECTION_URI + "/api/gardens";
     try {
-      let response = await axios.post(url, payload);
-      let { data } = response;
+      await axios.post(url, payload);
+      // let { data } = response;
     } catch (error) {
       alert("Error occurred, please try again...");
     }
@@ -96,7 +106,7 @@ const Plants = (props) => {
     } else {
       setSearchBar(
         <div className='columns' >
-      <form onSubmit='handleBack' className="search-bar column is-2">
+      <form onSubmit={handleBack} className="search-bar column is-2">
       <button id='back-button'><img src="https://img.icons8.com/material-rounded/48/000000/circled-chevron-left.png" alt="back_button" /></button>
       </form>
         <form onSubmit={handleSearch} className='search-bar column is-9'>

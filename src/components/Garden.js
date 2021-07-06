@@ -1,9 +1,10 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 
 const Garden = (props) => {
   const [plants, setPlants] = useState([]);
-  const [data, setData] = useState();
+  // const [data, setData] = useState();
   const CONNECTION_URI = process.env.REACT_APP_SERVER_URL;
   const { handleLogout } = props;
   const { exp, id } = props.user;
@@ -17,7 +18,7 @@ const Garden = (props) => {
 
   const handleDelete = async (e) => {
     e.preventDefault();
-    const deletePlant = await axios.delete(
+    await axios.delete(
       CONNECTION_URI + `/api/gardens/${e.target._id.value}`
     );
     setPlants([]);
@@ -91,11 +92,11 @@ const Garden = (props) => {
       newNote: newNote,
     };
     try {
-      let response = await axios.put(
+      await axios.put(
         CONNECTION_URI + `/api/gardens/${id}`,
         payload
       );
-      let { data } = response;
+      // let { data } = response;
       handleView(e);
     } catch (error) {
       alert("Error occurred, please try again...");
@@ -246,7 +247,8 @@ const Garden = (props) => {
   const searchGarden = async () => {
     const resp = await axios.get(CONNECTION_URI + `/api/gardens/user/${id}`);
     const data = await resp.data;
-    setData(data);
+    // setData(data);
+    console.log(data)
     const plantList = await data.gardens.map((p, idx) => {
       return (
         <div className="column is-3">
@@ -293,7 +295,8 @@ const Garden = (props) => {
   
   useEffect(() => {
     searchGarden();
-  }, []);
+    
+  },[]);
 
   return (
     <div className="columns is-multiline">

@@ -34,8 +34,8 @@ const Signup = () => {
       const payload = { name, email, password };
       let url = `${REACT_APP_SERVER_URL}/api/users/signup`;
       try {
-        let response = await axios.post(url, payload);
-        let { data } = response;
+        await axios.post(url, payload);
+        // let { data } = response;
         setRedirect(true);
       } catch (error) {
         alert("Error occurred, please try again...");

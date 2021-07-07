@@ -55,7 +55,6 @@ const Plants = (props) => {
     let url = CONNECTION_URI + "/api/gardens";
     try {
       await axios.post(url, payload);
-      // let { data } = response;
     } catch (error) {
       alert("Error occurred, please try again...");
     }
